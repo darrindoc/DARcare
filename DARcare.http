@@ -1,0 +1,6 @@
+@DARcare_HostAddress = http://localhost:5134
+
+GET {{DARcare_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
