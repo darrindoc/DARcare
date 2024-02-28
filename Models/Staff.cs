@@ -17,6 +17,8 @@ namespace DARcare.Models
         public string userName { get; set; }
         public string userPassword { get; set; }
         public int staffTypeId {  get; set; }
+        public int departmentId { get; set; }
         public StaffType StaffType { get; set; }
+        public string departmentName { get; set; }
     }
 }

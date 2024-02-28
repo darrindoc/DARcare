@@ -21,6 +21,8 @@ return (
                 <th>First Name</th>
                 <th>Date of Birth</th>
                 <th>Gender</th>
+                <th>Edit Patient</th>
+                <th>Encounter History</th>
             </tr>
         </thead>
         <tbody>
@@ -28,8 +30,10 @@ return (
                 <tr key={patient.id}>
                     <td>{patient.lastName}</td>
                     <td>{patient.firstName}</td>
-                    <td>{patient.dateOfBirth}</td>
+                    <td>{new Date(patient.dateOfBirth).toLocaleDateString('en-US')}</td>
                     <td>{patient.gender}</td>
+                    <td><button>Edit </button></td>
+                    <td><button>History</button></td>
                 </tr>
             ))}
         </tbody>

@@ -18,6 +18,7 @@ namespace DARcare
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IPatientRepository, PatientRepository>();
             builder.Services.AddTransient<IStaffRepository, StaffRepository>();
+            builder.Services.AddTransient<IEncounterRepository, EncounterRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
