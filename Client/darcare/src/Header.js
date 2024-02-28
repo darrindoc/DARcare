@@ -8,13 +8,18 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  Button
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function Header({isLoggedIn, setIsLoggedIn}) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+  //Access localstorage for userProfile
+  const userString = localStorage.getItem("userProfile");
+  const user = JSON.parse(userString);
 
   return (
     <div>
@@ -29,7 +34,7 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={RRNavLink} to="/patient">Patient</NavLink>
+                <NavLink tag={RRNavLink} to="/patient">Patient Database</NavLink>
               </NavItem>
               </>
             }
@@ -51,13 +56,12 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/login">Login</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/register">Register</NavLink>
-                </NavItem>
               </>
             }
           </Nav>
         </Collapse>
+            <h3>Current Department: {user.departmentName}</h3>
+            <button class="btn btn-sm btn-danger">Change Department</button>
       </Navbar>
     </div>
   );

@@ -15,7 +15,7 @@ function App() {
         }
     }, [isLoggedIn])
 
-    return (
+    return (<>
         <Router>
             <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             {isLoggedIn ?
@@ -24,7 +24,9 @@ function App() {
                 <Authorize setIsLoggedIn={setIsLoggedIn} />
             }
         </Router>
+        </>
     );
+
 }
 
 export default App;

@@ -13,7 +13,7 @@ export default function Login({setIsLoggedIn}) {
     e.preventDefault();
     login(username, password)
       .then(r =>{
-      if(r){
+      if(r.userName === username && r.userPassword === password){
       setIsLoggedIn(true)
       navigate('/')
       }
@@ -24,23 +24,29 @@ export default function Login({setIsLoggedIn}) {
   };
 
   return (
-    <Form onSubmit={loginSubmit}>
-      <fieldset>
-        <FormGroup>
-          <Label for="username">Username:</Label>
-          <Input id="username" type="text" onChange={e => setUsername(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password:</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Button>Login</Button>
-        </FormGroup>
-        <em>
-          Not registered? <Link to="/register">Register</Link>
-        </em>
-      </fieldset>
-    </Form>
+    <div class="container text-center">
+      <div class="row">
+          <div>Welcome to DARcare</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <Form onSubmit={loginSubmit}>
+            <fieldset>
+              <FormGroup>
+                <Label for="username">Username</Label>
+                <Input id="username" type="text" onChange={e => setUsername(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="password">Password</Label>
+                <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Button>Login</Button>
+              </FormGroup>
+            </fieldset>
+          </Form>
+        </div>
+      </div>
+    </div>
   );
 }
