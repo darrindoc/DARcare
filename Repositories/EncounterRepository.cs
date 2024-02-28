@@ -50,8 +50,10 @@ namespace DARcare.Repositories
                 }
             }
         }
+    }
+}
 
-        /*
+/*
         public UserProfile GetById(int id)
         {
             using (var conn = Connection)
@@ -170,5 +172,3 @@ namespace DARcare.Repositories
         }
 
         */
-    }
-}

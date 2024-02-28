@@ -21,8 +21,10 @@ namespace DARcare.Controllers
         {
             return Ok(_encounterRepository.GetAllEncounters());
         }
+    }
+}
 
-        /*
+/*
         [HttpGet("GetByEmail")]
         public IActionResult GetByEmail(string email)
         {
@@ -59,7 +61,3 @@ namespace DARcare.Controllers
                 userProfile);
         }
         */
-    }
-
-
-}
