@@ -22,8 +22,13 @@ namespace DARcare.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT *
-                                        FROM Staff";
+                    cmd.CommandText = @"
+                        SELECT s.Id, s.firstName, s.lastName, s.credentials, 
+                        s.title, s.userName, s.userPassword, s.staffTypeId, s.departmentId,
+                        st.name AS StaffTypeName, d.id, d.name AS departmentName
+                        FROM Staff s
+                        LEFT JOIN StaffType st on s.StaffTypeId = st.Id
+                        LEFT JOIN Department d on s.departmentId = d.id";
                     List<Staff> users = new List<Staff>();
 
                     var reader = cmd.ExecuteReader();
@@ -41,6 +46,12 @@ namespace DARcare.Repositories
                             userPassword = reader.GetString(reader.GetOrdinal("userPassword")),
                             staffTypeId = reader.GetInt32(reader.GetOrdinal("staffTypeId")),
                             departmentId = reader.GetInt32(reader.GetOrdinal("departmentId")),
+                            StaffType = new StaffType()
+                            {
+                                id = DbUtils.GetInt(reader, "StaffTypeId"),
+                                name = DbUtils.GetString(reader, "StaffTypeName"),
+                            },
+                            departmentName = reader.GetString(reader.GetOrdinal("departmentName")),
                         };
                         users.Add(user);
                     }
