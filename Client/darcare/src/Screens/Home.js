@@ -1,4 +1,5 @@
 import React from "react";
+import { ActivePatientTable } from "../Components/Patient/ActivePatientTable";
 
 export const HomeScreen = () => {
 
@@ -22,124 +23,7 @@ export const HomeScreen = () => {
             
             </div>
             <div class="col-8" id="active-patient-chart">
-                <table class="table scrollable">
-                    <thead>
-                        <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Gender</th>
-                        <th>Location</th>
-                        <th>Reason for Visit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>Porplenko</td>
-                        <td>Mariia</td>
-                        <td>Female</td>
-                        <td>1112</td>
-                        <td>Not Appendix</td>
-                        </tr>
-                        <tr>
-                        <td>Daugherty</td>
-                        <td>Darrin</td>
-                        <td>Male</td>
-                        <td>ERWR</td>
-                        <td>Maybe Appendix</td>
-                        </tr>
-                        <tr>
-                        <td>Colin</td>
-                        <td>Matteson</td>
-                        <td>Male</td>
-                        <td>1105</td>
-                        <td>Definitely Appendix</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs toe amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs nose amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs hand amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs toe amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs fingers amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs toe amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs toe amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs eye amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs toe amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs lips amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs head amputated</td>
-                        </tr>
-                        <tr>
-                        <td>Brad</td>
-                        <td>Pitt</td>
-                        <td>Male</td>
-                        <td>1107</td>
-                        <td>Needs toe amputated</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <ActivePatientTable/>
             </div>
         </div>
     </div>

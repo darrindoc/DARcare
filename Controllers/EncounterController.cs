@@ -2,6 +2,7 @@
 using DARcare.Models;
 using DARcare.Repositories;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DARcare.Controllers
@@ -16,11 +17,21 @@ namespace DARcare.Controllers
             _encounterRepository = encounterRepository;
         }
 
+        //Get All Encounters
         [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(_encounterRepository.GetAllEncounters());
         }
+
+
+        //Get All Active Encounters
+        [HttpGet("active")]
+        public IActionResult GetAllActive()
+        {
+            return Ok(_encounterRepository.GetAllActiveEncounters());
+        }
+
     }
 }
 
