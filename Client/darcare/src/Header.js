@@ -49,8 +49,6 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
                       setIsLoggedIn(false)
                     }}>Logout</a>
                 </NavItem>
-                <h3>Current Department: {user.departmentName}</h3>
-                <button class="btn btn-sm btn-danger">Change Department</button>
               </>
             }
             {!isLoggedIn &&
