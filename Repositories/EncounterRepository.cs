@@ -35,7 +35,7 @@ namespace DARcare.Repositories
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             patientId = reader.GetInt32(reader.GetOrdinal("patientId")),
                             admitTime = reader.GetDateTime(reader.GetOrdinal("admitTime")),
-                            dischargeTime = reader.GetDateTime(reader.GetOrdinal("dischargeTime")),
+                            dischargeTime = DbUtils.GetNullableDateTime(reader, "dischargeTime"),
                             dischargeStatusId = reader.GetInt32(reader.GetOrdinal("dischargeStatusId")),
                             admitStatusId = reader.GetInt32(reader.GetOrdinal("admitStatusId")),
                             encounterStatusId = reader.GetInt32(reader.GetOrdinal("encounterStatusId")),
@@ -51,7 +51,58 @@ namespace DARcare.Repositories
             }
         }
 
-        /*
+        
+        //GetAll() Lists all Active Encounters
+        public List<Encounter> GetAllActiveEncounters()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT 
+                                        e.id, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentId,
+                                        p.firstName,p.lastName,p.dateOfBirth,p.gender
+                                        FROM Encounters e
+                                        JOIN Patient p ON e.patientId = p.id
+                                        WHERE e.dischargeTime IS NULL;";
+                    List<Encounter> encounters = new List<Encounter>();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Encounter encounter = new Encounter()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            patientId = reader.GetInt32(reader.GetOrdinal("patientId")),
+                            admitTime = reader.GetDateTime(reader.GetOrdinal("admitTime")),
+                            dischargeTime = DbUtils.GetNullableDateTime(reader, "dischargeTime"),
+                            dischargeStatusId = reader.GetInt32(reader.GetOrdinal("dischargeStatusId")),
+                            admitStatusId = reader.GetInt32(reader.GetOrdinal("admitStatusId")),
+                            encounterStatusId = reader.GetInt32(reader.GetOrdinal("encounterStatusId")),
+                            departmentId = reader.GetInt32(reader.GetOrdinal("departmentId")),
+                            Patient = new Patient()
+                            {
+                                firstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                lastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                dateOfBirth = reader.GetDateTime(reader.GetOrdinal("dateOfBirth")),
+                                gender = reader.GetString(reader.GetOrdinal("gender")),
+                            }
+                        };
+                        encounters.Add(encounter);
+                    }
+
+                    reader.Close();
+
+                    return encounters;
+                }
+            }
+        } 
+    }
+}
+
+/*
         public UserProfile GetById(int id)
         {
             using (var conn = Connection)
@@ -170,5 +221,3 @@ namespace DARcare.Repositories
         }
 
         */
-    }
-}

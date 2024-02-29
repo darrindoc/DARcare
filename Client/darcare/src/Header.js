@@ -49,6 +49,8 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
                       setIsLoggedIn(false)
                     }}>Logout</a>
                 </NavItem>
+                <h3>Current Department: {user.departmentName}</h3>
+                <button class="btn btn-sm btn-danger">Change Department</button>
               </>
             }
             {!isLoggedIn &&
@@ -60,8 +62,7 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
             }
           </Nav>
         </Collapse>
-            <h3>Current Department: {user.departmentName}</h3>
-            <button class="btn btn-sm btn-danger">Change Department</button>
+
       </Navbar>
     </div>
   );
