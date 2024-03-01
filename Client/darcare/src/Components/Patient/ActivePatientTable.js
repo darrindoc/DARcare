@@ -26,30 +26,30 @@ export const ActivePatientTable = () => {
 
     return (
         <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Date of Birth</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th></th>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Date of Birth</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {activePatients.map((activePatient) => (
+                        <tr key={activePatient.Id}>
+                            <td>{activePatient.patient.lastName}</td>
+                            <td>{activePatient.patient.firstName}</td>
+                            <td>{new Date(activePatient.patient.dateOfBirth).toLocaleDateString('en-US')}</td>
+                            <td>{patientAge(activePatient.patient.dateOfBirth)}</td>
+                            <td>{activePatient.patient.gender}</td>
+                            <button class="btn btn-danger">Chart</button><button class="btn btn-success">Record</button>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {activePatients.map((activePatient) => (
-                            <tr key={activePatient.Id}>
-                                <td>{activePatient.patient.lastName}</td>
-                                <td>{activePatient.patient.firstName}</td>
-                                <td>{new Date(activePatient.patient.dateOfBirth).toLocaleDateString('en-US')}</td>
-                                <td>{patientAge(activePatient.patient.dateOfBirth)}</td>
-                                <td>{activePatient.patient.gender}</td>
-                                <button class="btn btn-danger">Chart</button><button class="btn btn-success">Record</button>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
