@@ -29,6 +29,7 @@ export const ActivePatientTable = () => {
             <table>
                 <thead>
                     <tr>
+                        <th>Room</th>
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Date of Birth</th>
@@ -40,6 +41,7 @@ export const ActivePatientTable = () => {
                 <tbody>
                     {activePatients.map((activePatient) => (
                         <tr key={activePatient.Id}>
+                            <td>{activePatient.location.room}</td>
                             <td>{activePatient.patient.lastName}</td>
                             <td>{activePatient.patient.firstName}</td>
                             <td>{new Date(activePatient.patient.dateOfBirth).toLocaleDateString('en-US')}</td>
