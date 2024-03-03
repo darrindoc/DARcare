@@ -13,6 +13,10 @@ export const patientAge = (dateOfBirth) => {
     return Math.abs(age.getUTCFullYear() - 1970)
 }
 
+export const formatDate = (dateTime) => {
+  return new Date(dateTime).toLocaleDateString('en-US')
+}
+
 
   //Access localstorage for userProfile
   const userString = localStorage.getItem("userProfile");

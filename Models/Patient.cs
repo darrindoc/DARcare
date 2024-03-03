@@ -16,5 +16,7 @@ namespace DARcare.Models
         public DateTime dateOfBirth { get; set; }
 
         public string gender {  get; set; }    
+
+        public Encounter? Encounter { get; set; }
     }
 }

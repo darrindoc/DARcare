@@ -61,11 +61,14 @@ namespace DARcare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT 
-                                        e.id, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentId,
-                                        p.firstName,p.lastName,p.dateOfBirth,p.gender
+                                        e.id, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentId, e.locationId,
+                                        p.firstName,p.lastName,p.dateOfBirth,p.gender,
+                                        l.name, l.room
                                         FROM Encounters e
                                         JOIN Patient p ON e.patientId = p.id
-                                        WHERE e.dischargeTime IS NULL;";
+                                        JOIN Location l on e.locationId = l.id
+                                        WHERE e.dischargeTime IS NULL
+                                        ORDER BY l.room;";
                     List<Encounter> encounters = new List<Encounter>();
 
                     var reader = cmd.ExecuteReader();
@@ -88,6 +91,11 @@ namespace DARcare.Repositories
                                 lastName = reader.GetString(reader.GetOrdinal("LastName")),
                                 dateOfBirth = reader.GetDateTime(reader.GetOrdinal("dateOfBirth")),
                                 gender = reader.GetString(reader.GetOrdinal("gender")),
+                            },
+                            Location = new Location() 
+                            {
+                                name = reader.GetString(reader.GetOrdinal("name")),
+                                room = reader.GetInt32(reader.GetOrdinal("room")),
                             }
                         };
                         encounters.Add(encounter);
