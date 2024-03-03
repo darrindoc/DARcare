@@ -22,6 +22,17 @@ namespace DARcare.Controllers
             return Ok(_patientRepository.GetAllPatients());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var user = _patientRepository.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
         /*
         [HttpGet("GetByEmail")]
         public IActionResult GetByEmail(string email)
