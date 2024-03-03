@@ -39,6 +39,7 @@ export const PatientRecord = () => {
             </div>
         </div>
       <div class="row">
+        <h3 class="">Encounter History</h3>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -51,7 +52,11 @@ export const PatientRecord = () => {
             {patientRecord.map((record, index) => (
                 <tr key={index}>
                     <td>{formatDate(record.encounter.admitTime)}</td>
+                    {record.encounter.dischargeTime !== null ? (
                     <td>{formatDate(record.encounter.dischargeTime)}</td>
+                    ) : (
+                    <td>Active Encounter</td>
+                    )}
                     <td>{record.encounter.id}</td>
                 </tr>
             ))}
