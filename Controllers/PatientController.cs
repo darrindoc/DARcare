@@ -23,9 +23,15 @@ namespace DARcare.Controllers
         }
 
         [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_patientRepository.GetById(id));
+        }
+
+        [HttpGet("/api/Patient/History/{id}")]
         public IActionResult Get(int id)
         {
-            var user = _patientRepository.GetById(id);
+            var user = _patientRepository.GetEncounterHistory(id);
             if (user == null)
             {
                 return NotFound();

@@ -20,7 +20,7 @@ namespace DARcare.Models
         //Get All Active Patients Query
         [DisplayName("Patient")]
         public Patient? Patient { get; set; }
-        public Location Location { get; set; }
+        public Location? Location { get; set; }
 
 
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { getAllActivePatients } from "../../Managers/EncounterManager";
 import { patientAge } from "../Functions";
 
@@ -8,6 +9,8 @@ export const ActivePatientTable = () => {
     //Access localstorage for userProfile
     const userString = localStorage.getItem("userProfile");
     const user = JSON.parse(userString);
+
+    
 
     const getActivePatients = () => {
         getAllActivePatients().then((activePatients) => setActivePatients(activePatients));
@@ -47,7 +50,10 @@ export const ActivePatientTable = () => {
                             <td>{new Date(activePatient.patient.dateOfBirth).toLocaleDateString('en-US')}</td>
                             <td>{patientAge(activePatient.patient.dateOfBirth)}</td>
                             <td>{activePatient.patient.gender}</td>
-                            <button class="btn btn-danger">Chart</button><button class="btn btn-success">Record</button>
+                            <button class="btn btn-danger">Chart</button>
+                            <button class="btn btn-lg btn-success">
+                                <Link to={`/patient/record/${activePatient.patientId}`} className="text-white">File</Link>
+                            </button>
                         </tr>
                     ))}
                 </tbody>

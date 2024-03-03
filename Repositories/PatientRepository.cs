@@ -49,7 +49,6 @@ namespace DARcare.Repositories
             }
         }
 
-
         public Patient GetById(int id)
         {
             using (var conn = Connection)
@@ -57,11 +56,9 @@ namespace DARcare.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT p.id, p.firstName, p.lastName, p.dateOfBirth, p.gender,
-                                        e.Id as encounterId, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentID, e.locationId
-                                        FROM Patient p
-                                        LEFT JOIN Encounters e on p.id = e.patientId
-                                        WHERE p.id = @id";
+                    cmd.CommandText = @"SELECT id, firstName, lastName, dateOfBirth, gender
+                                FROM Patient
+                                WHERE id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);
 
                     Patient patient = null;
@@ -71,6 +68,43 @@ namespace DARcare.Repositories
                         if (reader.Read())
                         {
                             patient = new Patient()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                firstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                lastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                dateOfBirth = reader.GetDateTime(reader.GetOrdinal("dateOfBirth")),
+                                gender = reader.GetString(reader.GetOrdinal("gender")),
+                            };
+                        }
+                    }
+
+                    return patient;
+                }
+            }
+        }
+
+        //list of encounter information
+        public List<Patient> GetEncounterHistory(int id)
+        {
+            List<Patient> patients = new List<Patient>();
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT p.id, p.firstName, p.lastName, p.dateOfBirth, p.gender,
+                                e.Id as encounterId, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentID, e.locationId
+                                FROM Patient p
+                                LEFT JOIN Encounters e on p.id = e.patientId
+                                WHERE p.id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Patient patient = new Patient()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 firstName = reader.GetString(reader.GetOrdinal("firstName")),
@@ -89,13 +123,16 @@ namespace DARcare.Repositories
                                     departmentId = reader.GetInt32(reader.GetOrdinal("departmentId")),
                                 }
                             };
+
+                            patients.Add(patient);
                         }
                     }
-
-                    return patient;
                 }
             }
+
+            return patients;
         }
+
 
         /*
         public UserProfile GetByEmail(string email)

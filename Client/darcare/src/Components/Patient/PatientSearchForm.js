@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAllPatients } from '../../Managers/PatientManager';
+import { formatDate } from '../Functions';
 
 export const PatientSearchForm = ({ people }) => {
   const [firstName, setFirstName] = useState('');
@@ -65,7 +66,7 @@ export const PatientSearchForm = ({ people }) => {
             <div>
               <h3>Match Found:</h3>
               <p>Name: {matchedPatient.firstName} {matchedPatient.lastName}</p>
-              <p>Date of Birth: {matchedPatient.dateOfBirth}</p>
+              <p>Date of Birth: {formatDate(matchedPatient.dateOfBirth)}</p>
               <button className="btn btn-danger">Register Patient</button>
             </div>
           ) : (
