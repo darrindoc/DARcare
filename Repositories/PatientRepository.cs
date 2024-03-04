@@ -115,7 +115,7 @@ namespace DARcare.Repositories
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("encounterId")),
                                     patientId = reader.GetInt32(reader.GetOrdinal("patientId")),
-                                    admitTime = reader.GetDateTime(reader.GetOrdinal("admitTime")),
+                                    admitTime = reader.IsDBNull(reader.GetOrdinal("admitTime")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("admitTime")),
                                     dischargeTime = DbUtils.GetNullableDateTime(reader, "dischargeTime"),
                                     dischargeStatusId = reader.GetInt32(reader.GetOrdinal("dischargeStatusId")),
                                     admitStatusId = reader.GetInt32(reader.GetOrdinal("admitStatusId")),

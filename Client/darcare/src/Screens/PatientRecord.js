@@ -74,8 +74,8 @@ export const PatientRecord = () => {
           </table>
         </div>
       ) : (
-        <div class="row">
-          <p>This patient has no encounter history.</p>
+        <div class="row text-center">
+          <h3>This patient has no encounter history.</h3>
         </div>
       )}
 

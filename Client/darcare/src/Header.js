@@ -27,7 +27,7 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
         <NavbarBrand tag={RRNavLink} to="/">St. Sarah's Regional Medical Center</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="mr-auto fixed-top" navbar>
             { /* When isLoggedIn === true, we will render the Home link */ }
             {isLoggedIn && <>
               </>
