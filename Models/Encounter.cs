@@ -10,7 +10,7 @@ namespace DARcare.Models
     {
         public int Id { get; set; }
         public int patientId { get; set; }
-        public DateTime admitTime { get; set; }
+        public DateTime? admitTime { get; set; }
         public DateTime? dischargeTime { get; set; }
         public int dischargeStatusId { get; set; }
         public int admitStatusId { get; set; }
