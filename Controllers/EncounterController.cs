@@ -32,6 +32,17 @@ namespace DARcare.Controllers
             return Ok(_encounterRepository.GetAllActiveEncounters());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var user = _encounterRepository.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
     }
 }
 

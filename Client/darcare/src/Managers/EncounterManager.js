@@ -16,3 +16,10 @@ export const getAllPatients = () => {
       return res.json();
     })
   };
+
+  export const getEncounterById = (id) => {
+    return fetch(`${baseUrl}/${id}`) 
+    .then((res) => {
+      return res.json();
+    })
+  };

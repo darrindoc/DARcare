@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DARcare.Models
 {
-    public class Procedures
+    public class Procedure
     {
         public int Id { get; set; }
 

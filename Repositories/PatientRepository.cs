@@ -111,11 +111,11 @@ namespace DARcare.Repositories
                                 lastName = reader.GetString(reader.GetOrdinal("lastName")),
                                 dateOfBirth = reader.GetDateTime(reader.GetOrdinal("dateOfBirth")),
                                 gender = reader.GetString(reader.GetOrdinal("gender")),
-                                Encounter = new Encounter()
+                                Encounter = reader.IsDBNull(reader.GetOrdinal("encounterId")) ? null : new Encounter()
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("encounterId")),
                                     patientId = reader.GetInt32(reader.GetOrdinal("patientId")),
-                                    admitTime = reader.GetDateTime(reader.GetOrdinal("admitTime")),
+                                    admitTime = reader.IsDBNull(reader.GetOrdinal("admitTime")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("admitTime")),
                                     dischargeTime = DbUtils.GetNullableDateTime(reader, "dischargeTime"),
                                     dischargeStatusId = reader.GetInt32(reader.GetOrdinal("dischargeStatusId")),
                                     admitStatusId = reader.GetInt32(reader.GetOrdinal("admitStatusId")),

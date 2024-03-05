@@ -17,6 +17,9 @@ export const formatDate = (dateTime) => {
   return new Date(dateTime).toLocaleDateString('en-US')
 }
 
+export const formatTime = (dateTime) => {
+  return new Date(dateTime).toLocaleTimeString()
+}
 
   //Access localstorage for userProfile
   const userString = localStorage.getItem("userProfile");
