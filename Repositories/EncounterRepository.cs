@@ -85,6 +85,7 @@ namespace DARcare.Repositories
                             admitStatusId = reader.GetInt32(reader.GetOrdinal("admitStatusId")),
                             encounterStatusId = reader.GetInt32(reader.GetOrdinal("encounterStatusId")),
                             departmentId = reader.GetInt32(reader.GetOrdinal("departmentId")),
+                            locationId = reader.GetInt32(reader.GetOrdinal("locationId")),
                             Patient = new Patient()
                             {
                                 firstName = reader.GetString(reader.GetOrdinal("FirstName")),
@@ -106,7 +107,62 @@ namespace DARcare.Repositories
                     return encounters;
                 }
             }
-        } 
+        }
+
+        public Encounter GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        SELECT e.id, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentId, e.locationId
+                                        p.id, p.firstName, p.lastName, p.dateOfBirth, p.gender,
+                                        l.id, l.name, l.departmentId, l.room
+                                        FROM Encounters e
+                                        LEFT JOIN Patient p on e.patientId = p.id
+                                        LEFT JOIN Location l on e.locationId = l.id
+                                        WHERE e.Id = @id";
+
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    Encounter encounter = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        encounter = new Encounter()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            patientId = reader.GetInt32(reader.GetOrdinal("patientId")),
+                            admitTime = reader.GetDateTime(reader.GetOrdinal("admitTime")),
+                            dischargeTime = DbUtils.GetNullableDateTime(reader, "dischargeTime"),
+                            dischargeStatusId = reader.GetInt32(reader.GetOrdinal("dischargeStatusId")),
+                            admitStatusId = reader.GetInt32(reader.GetOrdinal("admitStatusId")),
+                            encounterStatusId = reader.GetInt32(reader.GetOrdinal("encounterStatusId")),
+                            departmentId = reader.GetInt32(reader.GetOrdinal("departmentId")),
+                            locationId = reader.GetInt32(reader.GetOrdinal("locationId")),
+                            Patient = new Patient()
+                            {
+                                firstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                lastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                dateOfBirth = reader.GetDateTime(reader.GetOrdinal("dateOfBirth")),
+                                gender = reader.GetString(reader.GetOrdinal("gender"))
+                            },
+                            Location = new Location()
+                            {
+                                name = reader.GetString(reader.GetOrdinal("name")),
+                                room = reader.GetInt32(reader.GetOrdinal("room")),
+                            }
+                        };
+                    }
+                    reader.Close();
+
+                    return encounter;
+                }
+            }
+        }
     }
 }
 

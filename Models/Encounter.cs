@@ -16,6 +16,7 @@ namespace DARcare.Models
         public int admitStatusId { get; set; }
         public int encounterStatusId { get; set; }
         public int departmentId { get; set; }
+        public int locationId { get; set; }
 
         //Get All Active Patients Query
         [DisplayName("Patient")]

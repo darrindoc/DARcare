@@ -13,5 +13,7 @@ namespace DARcare.Models
         public int staffId { get; set; }
         public DateTime procedureTime { get; set; }
         public string notes { get; set; }
+        public Staff Staff { get; set; }
+        public Procedure Procedure { get; set; }
     }
 }
