@@ -117,7 +117,7 @@ namespace DARcare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT e.id, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentId, e.locationId
+                                        SELECT e.id, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentId, e.locationId,
                                         p.id, p.firstName, p.lastName, p.dateOfBirth, p.gender,
                                         l.id, l.name, l.departmentId, l.room
                                         FROM Encounters e

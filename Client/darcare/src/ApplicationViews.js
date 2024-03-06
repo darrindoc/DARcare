@@ -5,15 +5,19 @@ import { HomeScreen } from "./Screens/Home";
 import { PatientRegisterForm } from "./Screens/PatientRegister";
 import { PatientRecord } from "./Screens/PatientRecord";
 import { EncounterChart } from "./Screens/EncounterChart";
+import { AdminPanel } from "./Screens/AdminPanel";
+import { DepartmentChange } from "./Components/Staff/StaffDepartment";
 
-export default function ApplicationViews() {
+export default function ApplicationViews({setIsLoggedIn}) {
   return (
     <Routes>
       <Route path="/" element={<HomeScreen />} />
+      <Route path="/departmentchange" element={<DepartmentChange setIsLoggedIn={setIsLoggedIn} />} />
       <Route path="/patient" element={<PatientList />} />
       <Route path="/patient/record/:id" element={<PatientRecord />} />
       <Route path="/register" element={<PatientRegisterForm />} />
       <Route path="/encounter/:id" element={<EncounterChart />} />
+      <Route path="/admin/panel" element={<AdminPanel />} />
     </Routes>
   );
 }
