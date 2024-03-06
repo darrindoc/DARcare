@@ -34,6 +34,15 @@ namespace DARcare.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPost("department")]
+        public IActionResult UpdateDepartment(int userId, int departmentId)
+        {
+            _staffRepository.UpdateDepartment(userId, departmentId);
+            return Ok();
+        }
+
+
         /*
         [HttpGet("{id}")]
         public IActionResult Get(int id)
