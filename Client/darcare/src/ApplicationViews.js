@@ -7,6 +7,7 @@ import { PatientRecord } from "./Screens/PatientRecord";
 import { EncounterChart } from "./Screens/EncounterChart";
 import { AdminPanel } from "./Screens/AdminPanel";
 import { DepartmentChange } from "./Components/Staff/StaffDepartment";
+import { AddTreatmentForm } from "./Components/Treatments/AddTreatmentForm";
 
 export default function ApplicationViews({setIsLoggedIn}) {
   return (
@@ -18,6 +19,7 @@ export default function ApplicationViews({setIsLoggedIn}) {
       <Route path="/register" element={<PatientRegisterForm />} />
       <Route path="/encounter/:id" element={<EncounterChart />} />
       <Route path="/admin/panel" element={<AdminPanel />} />
+      <Route path="/addtreatment" element={<AddTreatmentForm />} />
     </Routes>
   );
 }

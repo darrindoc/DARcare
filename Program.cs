@@ -23,6 +23,7 @@ namespace DARcare
             builder.Services.AddTransient<IDischargeStatusRepository, DischargeStatusRepository>();
             builder.Services.AddTransient<IStaffTypeRepository, StaffTypeRepository>();
             builder.Services.AddTransient<ITreatmentRepository, TreatmentRepository>();
+            builder.Services.AddTransient<IProcedureRepository, ProcedureRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
