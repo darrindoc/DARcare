@@ -32,7 +32,7 @@ namespace DARcare.Controllers
         [HttpPost("add")]
         public IActionResult Post(Treatment treatment)
         {
-            treatment.procedureTime = DateTime.Now;
+            
             _treatmentRepository.Add(treatment);
             //return CreatedAtAction("Get", new { id = treatment.Id }, treatment);
             return Ok();

@@ -66,7 +66,8 @@ namespace DARcare.Repositories
                 FROM Treatments t
                 LEFT JOIN Procedures p ON t.procedureId = p.id
                 LEFT JOIN Staff s ON t.staffId = s.id
-                WHERE t.encounterId = @encounterId";
+                WHERE t.encounterId = @encounterId
+                ORDER BY t.procedureTime";
 
                     DbUtils.AddParameter(cmd, "@encounterId", id);
 
