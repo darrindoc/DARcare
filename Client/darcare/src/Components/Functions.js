@@ -24,3 +24,7 @@ export const formatTime = (dateTime) => {
   //Access localstorage for userProfile
   const userString = localStorage.getItem("userProfile");
   const user = JSON.parse(userString);
+
+export const reloadPage = () => {
+    window.location.reload();
+  }

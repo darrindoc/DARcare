@@ -4,10 +4,12 @@ import { useParams, Link } from "react-router-dom";
 import { getTreatmentByEncounter } from "../Managers/TreatmentManager";
 import { getEncounterById } from "../Managers/EncounterManager";
 import { formatDate, formatTime } from "../Components/Functions";
+import { AddTreatmentForm } from "../Components/Treatments/AddTreatmentForm";
 
 export const EncounterChart = () => {
   const [encounter, setEncounter] = useState([]);
   const [treatments, setTreatments] = useState([])
+  const [treatmentPopUp, setTreatmentPopUp] = useState(false)
   const { id } = useParams();
 
   const getEncounter = () => {
@@ -25,6 +27,19 @@ export const EncounterChart = () => {
   useEffect(() => {
     getTreatments();
   }, [id]);
+
+  //these modify the pop up for addind a treatment
+  const openPopup = () => {
+    setTreatmentPopUp(true);
+  };
+
+  const closePopup = () => {
+    setTreatmentPopUp(false);
+  };
+
+    //Access localstorage for userProfile
+    const userString = localStorage.getItem("userProfile");
+    const user = JSON.parse(userString);
 
   return (
     <div class="container-fluid">
@@ -84,14 +99,22 @@ export const EncounterChart = () => {
         </div>
         <div class="row text-center">
         </div>
-      
-
       <button class="btn btn-lg btn-success">
         <Link to="/patient" className="text-white">
           Patient Database
         </Link>
       </button>
-      <button class="btn btn-danger btn-lg">Add Treatment</button>
+      <div>
+      <button class="btn btn-lg btn-danger"onClick={openPopup}>Add Treatment</button>
+      {treatmentPopUp && (
+        <div className="popup">
+          <div className="popup-content">
+            <button class="btn btn-sm btn-info"className="close" onClick={closePopup}>Close</button>
+            <AddTreatmentForm isOpen={treatmentPopUp} onClose={closePopup} encounterId={encounter.id} staffId={user.id}/>
+          </div>
+        </div>
+      )}
+    </div>
     </div>
   );
 };

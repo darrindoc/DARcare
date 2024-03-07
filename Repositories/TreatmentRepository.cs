@@ -6,6 +6,7 @@ using DARcare.Models;
 using System.Xml.Linq;
 using DARcare.Repositories;
 using DARcare.Utils;
+using Microsoft.Extensions.Hosting;
 
 namespace DARcare.Repositories
 {
@@ -103,6 +104,34 @@ namespace DARcare.Repositories
                 }
             }
         }
+
+        public void Add(Treatment treatment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        INSERT INTO Treatments (encounterId, procedureId, staffId, procedureTime, notes)
+                                        VALUES (@encounterId, @procedureId, @staffId, @procedureTime, @notes)";
+
+                    DbUtils.AddParameter(cmd, "@encounterId", treatment.encounterId);
+                    DbUtils.AddParameter(cmd, "@procedureId", treatment.procedureId);
+                    DbUtils.AddParameter(cmd, "@staffId", treatment.staffId);
+                    DbUtils.AddParameter(cmd, "@procedureTime", treatment.procedureTime);
+                    DbUtils.AddParameter(cmd, "@notes", treatment.notes);
+
+                    //treatment.Id = (int)cmd.ExecuteScalar();
+                    cmd.ExecuteNonQuery();
+
+
+
+                }
+
+            }
+        }
+
 
     }
 } 

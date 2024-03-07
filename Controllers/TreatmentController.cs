@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DARcare.Models;
 using DARcare.Repositories;
+using Microsoft.Extensions.Hosting;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,10 +23,20 @@ namespace DARcare.Controllers
             return Ok(_treatmentRepository.GetAllTreatments());
         }
 
-        [HttpGet("encounterId")]
-        public IActionResult GetTreatmentsByEncounter(int id)
+        [HttpGet("{encounterId}")]
+        public IActionResult GetTreatmentsByEncounter(int encounterId)
         {
-            return Ok(_treatmentRepository.GetTreatmentsByEncounter(id));
+            return Ok(_treatmentRepository.GetTreatmentsByEncounter(encounterId));
         }
+
+        [HttpPost("add")]
+        public IActionResult Post(Treatment treatment)
+        {
+            treatment.procedureTime = DateTime.Now;
+            _treatmentRepository.Add(treatment);
+            //return CreatedAtAction("Get", new { id = treatment.Id }, treatment);
+            return Ok();
+        }
+
     }
 }

@@ -6,5 +6,6 @@ namespace DARcare.Repositories
     {
         List<Treatment> GetAllTreatments();
         List<Treatment> GetTreatmentsByEncounter(int id);
+        void Add(Treatment treatment);
     }
 }
