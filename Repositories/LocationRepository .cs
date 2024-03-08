@@ -9,41 +9,38 @@ using DARcare.Utils;
 
 namespace DARcare.Repositories
 {
-    public class LocationRepository : BaseRepository, ILocationRepository
+    public class DepartmentRepository : BaseRepository, IDepartmentRepository
     {
-        public LocationRepository(IConfiguration configuration) : base(configuration) { }
+        public DepartmentRepository(IConfiguration configuration) : base(configuration) { }
 
 
         //GetAll() Lists all Departments
-        public List<Location> GetAllLocations()
+        public List<Department> GetAllDepartments()
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, name, departmentId, room
-                                        FROM Location
-                                        ORDER BY name";
-                    List<Location> locations = new List<Location>();
+                    cmd.CommandText = @"SELECT id, name
+                                        FROM Department";
+                    List<Department> departments = new List<Department>();
 
                     var reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Location location = new Location()
+                        Department department = new Department()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             name = reader.GetString(reader.GetOrdinal("name")),
-                            departmentId = reader.GetInt32(reader.GetOrdinal("departmentId")),
-                            room = reader.GetInt32(reader.GetOrdinal("room")),
                         };
-                        locations.Add(location);
+                        departments.Add(department);
                     }
 
                     reader.Close();
 
-                    return locations;
+                    return departments;
                 }
             }
         }

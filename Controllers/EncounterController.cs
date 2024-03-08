@@ -43,6 +43,13 @@ namespace DARcare.Controllers
             return Ok(user);
         }
 
+        [HttpPost("add")]
+        public IActionResult Post(Encounter encounter)
+        {
+            _encounterRepository.Add(encounter);
+            return Ok();
+        }
+
     }
 }
 

@@ -163,6 +163,32 @@ namespace DARcare.Repositories
                 }
             }
         }
+
+        public void Add(Encounter encounter)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Encounters (patientId, admitTime, dischargeTime, dischargeStatusId, admitStatusId, encounterStatusId, departmentID, locationId)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@patientId, @admitTime, @dischargeTime, @dischargeStatusId, @admitStatusId, @encounterStatusId, @departmentID, @locationId)";
+                    DbUtils.AddParameter(cmd, "@patientId", encounter.patientId);
+                    DbUtils.AddParameter(cmd, "@admitTime", encounter.admitTime);
+                    DbUtils.AddParameter(cmd, "@dischargeTime", encounter.dischargeTime);
+                    DbUtils.AddParameter(cmd, "@dischargeStatusId", encounter.dischargeStatusId);
+                    DbUtils.AddParameter(cmd, "@admitStatusId", encounter.admitStatusId);
+                    DbUtils.AddParameter(cmd, "@encounterStatusId", encounter.encounterStatusId);
+                    DbUtils.AddParameter(cmd, "@departmentID", encounter.departmentId);
+                    DbUtils.AddParameter(cmd, "@locationId", encounter.locationId);
+
+                    encounter.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+
     }
 }
 
