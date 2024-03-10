@@ -7,5 +7,7 @@ namespace DARcare.Repositories
         List<Encounter> GetAllEncounters();
         List<Encounter> GetAllActiveEncounters();
         Encounter GetById(int id);
+        void Add(Encounter encounter);
+        void Discharge(Encounter encounter);
     }
 }

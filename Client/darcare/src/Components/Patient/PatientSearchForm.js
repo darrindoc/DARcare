@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { getAllPatients } from '../../Managers/PatientManager';
 import { formatDate } from '../Functions';
 
-export const PatientSearchForm = ({ people }) => {
+export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dob, setDob] = useState('');
   const [patientDB, setPatientDB] = useState([]);
-  const [matchedPatient, setMatchedPatient] = useState(null);
+  //const [matchedPatient, setMatchedPatient] = useState(null);
   const [searchClicked, setSearchClicked] = useState(false)
 
   const getPatientList = () => {

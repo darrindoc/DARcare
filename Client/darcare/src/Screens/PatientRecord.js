@@ -56,6 +56,7 @@ export const PatientRecord = () => {
                 <th class="col">Admission Date</th>
                 <th scope="col">Discharge Date</th>
                 <th scope="col">Encounter ID</th>
+                <th scope="col">Chart</th>
               </tr>
             </thead>
             <tbody>
@@ -68,6 +69,11 @@ export const PatientRecord = () => {
                     <td>Active Encounter</td>
                   )}
                   <td>{record.encounter ? record.encounter.id : 'N/A'}</td>
+                  <td>
+                    <button class="btn btn-lg btn-danger">
+                      <Link to={`/encounter/${record.encounter.id}`} className="text-white">Chart</Link>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

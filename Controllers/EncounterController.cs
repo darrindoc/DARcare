@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DARcare.Models;
 using DARcare.Repositories;
+using Microsoft.Extensions.Hosting;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -42,6 +43,26 @@ namespace DARcare.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPost("add")]
+        public IActionResult Post(Encounter encounter)
+        {
+            _encounterRepository.Add(encounter);
+            return Ok();
+        }
+
+        [HttpPut("discharge/{id}")]
+        public IActionResult Put(int id, Encounter encounter)
+        {
+            if (id != encounter.Id)
+            {
+                return BadRequest();
+            }
+            encounter.dischargeTime = DateTime.Now;
+            _encounterRepository.Discharge(encounter);
+            return NoContent();
+        }
+
 
     }
 }

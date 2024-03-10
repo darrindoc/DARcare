@@ -27,7 +27,7 @@ export const HomeScreen = () => {
                     <Link to="/departmentchange" className="text-white">Change Department</Link>
                 </button>
                 <button class="btn btn-lg btn-success">
-                    <Link to="/register" className="text-white">Register Patient</Link>
+                    <Link to="/encounter/add" className="text-white">Register Patient</Link>
                 </button>
                 <button class="btn btn-lg btn-success">
                     <Link to="/patient" className="text-white">Patient Database</Link>

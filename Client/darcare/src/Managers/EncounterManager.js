@@ -23,3 +23,31 @@ export const getAllPatients = () => {
       return res.json();
     })
   };
+
+  export const addEncounter = (encounterData) => {
+    return fetch(`${baseUrl}/add`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          patientId: encounterData.patientId,
+          admitTime: encounterData.admitTime,
+          dischargeStatusId: 0,
+          admitStatusId: 0,
+          encounterStatusId: 0,
+          departmentId: encounterData.departmentId,
+          locationId: encounterData.locationId
+        })
+    })
+    }
+
+    export const dischargePatient= (encounter) => {
+      return fetch(`${baseUrl}/discharge/${encounter.id}`, {
+          method: "PUT",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(encounter)
+      })
+    }
