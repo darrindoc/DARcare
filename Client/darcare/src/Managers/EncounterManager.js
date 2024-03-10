@@ -41,3 +41,13 @@ export const getAllPatients = () => {
         })
     })
     }
+
+    export const dischargePatient= (encounter) => {
+      return fetch(`${baseUrl}/discharge/${encounter.id}`, {
+          method: "PUT",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(encounter)
+      })
+    }

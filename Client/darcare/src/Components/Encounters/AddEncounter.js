@@ -62,7 +62,6 @@ export const AddEncounterForm= ({isOpen, onClose, patientId}) => {
     <PatientSearchForm matchedPatient={matchedPatient} setMatchedPatient={setMatchedPatient}/>
     <div class="col text-center">
     <form onSubmit={handleSubmit}>
-      
         <div class="row">
         <input hidden type="text" id="encounterId" name="encounterId" value={encounterData.encounterId} onChange={handleInputChange} />
       </div>

@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { getTreatmentByEncounter } from "../Managers/TreatmentManager";
-import { getEncounterById } from "../Managers/EncounterManager";
+import { dischargePatient, getEncounterById } from "../Managers/EncounterManager";
 import { formatDate, formatTime } from "../Components/Functions";
 import { AddTreatmentForm } from "../Components/Treatments/AddTreatmentForm";
+import { useNavigate } from "react-router-dom";
 
 export const EncounterChart = () => {
   const [encounter, setEncounter] = useState([]);
@@ -19,6 +20,8 @@ export const EncounterChart = () => {
   const getTreatments = () => {
     getTreatmentByEncounter(id).then((theseTreatments) => setTreatments(theseTreatments));
   };
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getEncounter();
@@ -40,6 +43,13 @@ export const EncounterChart = () => {
     //Access localstorage for userProfile
     const userString = localStorage.getItem("userProfile");
     const user = JSON.parse(userString);
+
+    const handleDischarge = () => {
+      dischargePatient(encounter)
+      navigate('/')
+    }
+
+    
 
   return (
     <div class="container-fluid">
@@ -115,6 +125,7 @@ export const EncounterChart = () => {
         </div>
       )}
     </div>
+    <button class="btn btn-lg btn-info"onClick={handleDischarge}>Discharge Patient</button>
     </div>
   );
 };

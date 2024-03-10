@@ -6,6 +6,7 @@ using DARcare.Models;
 using System.Xml.Linq;
 using DARcare.Repositories;
 using DARcare.Utils;
+using Microsoft.Extensions.Hosting;
 
 namespace DARcare.Repositories
 {
@@ -187,6 +188,28 @@ namespace DARcare.Repositories
                 }
             }
         }
+
+        public void Discharge(Encounter encounter)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        UPDATE Encounters
+                                        SET dischargeTime = @dischargeTime
+                                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@dischargeTime", encounter.dischargeTime);
+                    DbUtils.AddParameter(cmd, "@Id", encounter.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
 
 
     }

@@ -76,7 +76,6 @@ export const PatientList = () => {
             <th>First Name</th>
             <th>Date of Birth</th>
             <th>Gender</th>
-            <th>Edit Patient</th>
             <th>Encounter History</th>
           </tr>
         </thead>
@@ -89,9 +88,6 @@ export const PatientList = () => {
                 {new Date(patient.dateOfBirth).toLocaleDateString("en-US")}
               </td>
               <td>{patient.gender}</td>
-              <td>
-                <button>Edit</button>
-              </td>
               <td>
                 <Link
                   to={`/patient/record/${patient.id}`}
