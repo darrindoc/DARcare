@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { getAllPatients } from '../../Managers/PatientManager';
+import { addPatient, getAllPatients } from '../../Managers/PatientManager';
 import { formatDate } from '../Functions';
 
 export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dob, setDob] = useState('');
+  const [gender, setGender] = useState('');
   const [patientDB, setPatientDB] = useState([]);
   //const [matchedPatient, setMatchedPatient] = useState(null);
   const [searchClicked, setSearchClicked] = useState(false)
@@ -37,9 +38,10 @@ export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
   const searchWarning = () => {
     const verifyReg = window.confirm("This action will create a new patient. Please verify spelling of patient's name and date of birth are correct.")
     if (verifyReg) {
-      // Logic for registering a new patient
-    }
+      addPatient(firstName, lastName, dob, gender)
   }
+}
+
 
   return (
     <div className="container">
@@ -60,6 +62,15 @@ export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
               Date of Birth:
               <input required type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
             </label>
+            <label>
+              Gender:
+              <select required id="gender" name="gender" onChange={(e) => setGender(e.target.value)}>
+                <option value="" disabled selected>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+          
+            </label>
             <button className="btn btn-sm btn-success" type="submit">Search</button>
           </form>
           {searchClicked && matchedPatient !== "noMatch" ? (
@@ -73,7 +84,7 @@ export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
             searchClicked && 
             <div>
               <h3>No Match Found</h3>
-              <button className="btn btn-danger" onClick={searchWarning}>Register New Patient</button>
+              <button className="btn btn-danger" onClick={searchWarning}>Add New Patient</button>
             </div>
           )}
         </div>
