@@ -124,8 +124,10 @@ export const EncounterChart = () => {
           </div>
         </div>
       )}
-    </div>
-    <button class="btn btn-lg btn-info"onClick={handleDischarge}>Discharge Patient</button>
+      {encounter.dischargeTime == null ? (
+            <button class="btn btn-lg btn-info" onClick={handleDischarge}>Discharge Patient</button>
+          ) : (<></>)}
+      </div>
     </div>
   );
 };
