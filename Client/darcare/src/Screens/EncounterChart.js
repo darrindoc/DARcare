@@ -66,11 +66,26 @@ export const EncounterChart = () => {
                     <h4 class="list-group-item">{encounter.patient?.gender}</h4>
                 </ul>
                 </div>
-                <div class="col-8 text-end">
+                <div class="col-4 text-center">
                     <ul class="list-group list-group-flush">
-                        <h4 class="list-group-item">{encounter.location?.room} {encounter.location?.name}</h4>
+                        <h4 class="list-group-item">{encounter.location?.name} - {encounter.location?.room} </h4>
                         <h4 class="list-group-item">Admit Date: {formatDate(encounter.admitTime)}</h4>
                         <h4 class="list-group-item">Admit Time: {formatTime(encounter.admitTime)}</h4>
+                    </ul>
+                </div>
+                <div class="col-4 text-end">
+                    <ul class="list-group list-group-flush">
+                        <h4 class="list-group-item"> {encounter.location?.room}</h4>
+                        {encounter.dischargeTime == null ? (<>
+                            <h4 class="list-group-item">Discharge Date: Active</h4>
+                            <h4 class="list-group-item">Discharge Time: Active</h4>
+                            </>
+                          ) : (<>
+                            <h4 class="list-group-item">Discharge Date: {formatDate(encounter.dischargeTime)}</h4>
+                            <h4 class="list-group-item">Discharge Time: {formatTime(encounter.dischargeTime)}</h4>
+                            </>
+                          )}
+
                     </ul>
                 </div>
             </div>
@@ -124,8 +139,10 @@ export const EncounterChart = () => {
           </div>
         </div>
       )}
-    </div>
-    <button class="btn btn-lg btn-info"onClick={handleDischarge}>Discharge Patient</button>
+      {encounter.dischargeTime == null ? (
+            <button class="btn btn-lg btn-info" onClick={handleDischarge}>Discharge Patient</button>
+          ) : (<></>)}
+      </div>
     </div>
   );
 };
