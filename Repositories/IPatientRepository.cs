@@ -7,5 +7,6 @@ namespace DARcare.Repositories
         List<Patient> GetAllPatients();
         Patient GetById(int id);
         List<Patient> GetEncounterHistory(int id);
+        void Add(Patient patient);
     }
 }

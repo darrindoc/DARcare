@@ -6,6 +6,7 @@ using DARcare.Models;
 using System.Xml.Linq;
 using DARcare.Repositories;
 using DARcare.Utils;
+using System.Diagnostics.Metrics;
 
 namespace DARcare.Repositories
 {
@@ -132,6 +133,29 @@ namespace DARcare.Repositories
 
             return patients;
         }
+
+        public void Add(Patient patient)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                INSERT INTO Patient (firstName, lastName, dateOfBirth, gender)
+                                OUTPUT INSERTED.ID
+                                VALUES (@firstName, @lastName, @dateOfBirth, @gender)";
+
+                    DbUtils.AddParameter(cmd, "@firstName", patient.firstName);
+                    DbUtils.AddParameter(cmd, "@lastName", patient.lastName);
+                    DbUtils.AddParameter(cmd, "@dateOfBirth", patient.dateOfBirth);
+                    DbUtils.AddParameter(cmd, "@gender", patient.gender);
+
+                    patient.Id = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
 
 
         /*

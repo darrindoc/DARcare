@@ -39,6 +39,13 @@ namespace DARcare.Controllers
             return Ok(user);
         }
 
+        [HttpPost("add")]
+        public IActionResult Post(Patient patient)
+        {
+            _patientRepository.Add(patient);
+            return Ok();
+        }
+
         /*
         [HttpGet("GetByEmail")]
         public IActionResult GetByEmail(string email)
