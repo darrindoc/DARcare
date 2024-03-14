@@ -89,12 +89,7 @@ export const PatientList = () => {
               </td>
               <td>{patient.gender}</td>
               <td>
-                <Link
-                  to={`/patient/record/${patient.id}`}
-                  className="btn btn-success"
-                >
-                  File
-                </Link>
+                <Link to={`/patient/record/${patient.id}`} className="btn btn-success">File</Link>
               </td>
             </tr>
           ))}

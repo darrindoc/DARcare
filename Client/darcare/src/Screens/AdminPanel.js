@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 export const AdminPanel = () => {
@@ -12,7 +13,7 @@ return(<div class="col-fluid text-center">
                 <div class="card-body">
                     <h5 class="card-title">Staff</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Manage</a>
+                    <Link to={`/staff`} className="btn btn-success">Manage</Link>
                 </div>
             </div>
             <div class="card w-50">
