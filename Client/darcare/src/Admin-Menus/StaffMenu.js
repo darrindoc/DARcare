@@ -35,7 +35,7 @@ export const StaffList = () => {
     <div class="col-fluid text-center">
       <h2>Staff List</h2>
       <div class="row sticky-top border text-start" id="pt-database-search">
-        <h4>Search <button class="btn btn-sm btn-danger">Add Staff</button></h4>
+        <h4>Search <Link to={`/staff/add`} className="btn btn-danger">Add Staff</Link></h4>
         <div class="mb-3 col-6">
           <input
             type="text"

@@ -6,7 +6,7 @@ import { getAllDepartments } from '../../Managers/DepartmentManager';
 import { PatientSearchForm } from '../Patient/PatientSearchForm';
 import { useNavigate } from 'react-router-dom';
 
-export const AddEncounterForm= ({isOpen, onClose, patientId}) => {
+export const AddEncounterForm = ({patientId}) => {
   const [locations, setLocations] = useState([]);
   const [departments, setDepartments] =useState([])
   const [matchedPatient, setMatchedPatient] = useState(null);
@@ -38,6 +38,7 @@ export const AddEncounterForm= ({isOpen, onClose, patientId}) => {
   useEffect(() => {
     getLocations();
   }, []);
+  
   useEffect(() => {
     getDepartments();
   }, []);

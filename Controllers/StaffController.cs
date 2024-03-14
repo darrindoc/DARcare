@@ -42,6 +42,13 @@ namespace DARcare.Controllers
             return Ok();
         }
 
+        [HttpPost("add")]
+        public IActionResult Post(Staff staff)
+        {
+            _staffRepository.Add(staff);
+            return Ok();
+        }
+
 
         /*
         [HttpGet("{id}")]

@@ -64,8 +64,7 @@ namespace DARcare.Repositories
             }
         }
 
-
-
+        //Get user by username
         public Staff GetByUserName(string username)
         {
             using (var conn = Connection)
@@ -114,6 +113,7 @@ namespace DARcare.Repositories
             }
         }
 
+        //Change staff departmentId, which is used for filtering available patients in Active Patient Table
         public void UpdateDepartment(int userId, int departmentId)
         {
             using (var conn = Connection)
@@ -134,81 +134,28 @@ namespace DARcare.Repositories
             }
         }
 
-
-
-            /*
-                      public Staff GetById(int id)
+                public void Add(Staff staff)
                 {
                     using (var conn = Connection)
                     {
                         conn.Open();
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = @"
-                                SELECT s.Id, s.firstName, s.lastName, s.credentials, 
-                                       s.title, s.userName, s.userPassword, s.staffTypeId,
-                                       st.name AS StaffTypeName
-                                  FROM Staff s
-                                       LEFT JOIN StaffType st on s.StaffTypeId = st.Id
-                                 WHERE s.Id = @id";
-
-
-                            DbUtils.AddParameter(cmd, "@id", id);
-                            Staff staff = null;
-
-                            var reader = cmd.ExecuteReader();
-                            if (reader.Read())
-                            {
-                                staff = new Staff()
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                    firstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                    lastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                    credentials = reader.GetString(reader.GetOrdinal("credentials")),
-                                    title = reader.GetString(reader.GetOrdinal("title")),
-                                    userName = reader.GetString(reader.GetOrdinal("userName")),
-                                    userPassword = reader.GetString(reader.GetOrdinal("userPassword")),
-                                    staffTypeId = reader.GetInt32(reader.GetOrdinal("staffTypeId")),
-                                    StaffType = new StaffType()
-                                    {
-                                        id = DbUtils.GetInt(reader, "StaffTypeId"),
-                                        name = DbUtils.GetString(reader, "StaffTypeName"),
-                                    }
-                                };
-                            }
-                            reader.Close();
-
-                            return staff;
-                        }
-                    }
-                }
-
-                public void Add(UserProfile userProfile)
-                {
-                    using (var conn = Connection)
-                    {
-                        conn.Open();
-                        using (var cmd = conn.CreateCommand())
-                        {
-                            cmd.CommandText = @"INSERT INTO UserProfile (FirstName, LastName, DisplayName, 
-                                                                         Email, CreateDateTime, ImageLocation, UserTypeId)
+                            cmd.CommandText = @"INSERT INTO Staff (firstName, lastName, credentials, title, userName, userPassword, staffTypeId, departmentId)
                                                 OUTPUT INSERTED.ID
-                                                VALUES (@FirstName, @LastName, @DisplayName, 
-                                                        @Email, @CreateDateTime, @ImageLocation, @UserTypeId)";
-                            DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
-                            DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-                            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-                            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                            DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-                            DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.ImageLocation);
-                            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+                                                VALUES (@firstName, @lastName, @credentials, @title, @userName, @userPassword, @staffTypeId, 0)";
+                            DbUtils.AddParameter(cmd, "@firstName", staff.firstName);
+                            DbUtils.AddParameter(cmd, "@lastName", staff.lastName);
+                            DbUtils.AddParameter(cmd, "@credentials", staff.credentials);
+                            DbUtils.AddParameter(cmd, "@title", staff.title);
+                            DbUtils.AddParameter(cmd, "@userName", staff.userName);
+                            DbUtils.AddParameter(cmd, "@userPassword", staff.userPassword);
+                            DbUtils.AddParameter(cmd, "@staffTypeId", staff.staffTypeId);
 
-                            userProfile.Id = (int)cmd.ExecuteScalar();
+
+                    staff.Id = (int)cmd.ExecuteScalar();
                         }
                     }
                 }
-
-                */
-
         }
     }
