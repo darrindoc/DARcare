@@ -38,7 +38,7 @@ export const AddEncounterForm = ({patientId}) => {
   useEffect(() => {
     getLocations();
   }, []);
-  
+
   useEffect(() => {
     getDepartments();
   }, []);
@@ -52,10 +52,10 @@ export const AddEncounterForm = ({patientId}) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     addEncounter(encounterData);
     console.log(encounterData);
-    navigate('/')
+    navigate('/');
+    window.location.reload();
   };
   
 

@@ -34,11 +34,12 @@ export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
     }
   };
   
-  const searchWarning = async () => {
+  const searchWarning = async (e) => {
     const verifyReg = window.confirm("This action will create a new patient. Please verify spelling of patient's name and date of birth are correct.");
     if (verifyReg) {
       await addPatient(firstName, lastName, dob, gender);
       await getPatientList();
+      handleSubmit(e);
     }
   };
   
@@ -81,7 +82,6 @@ export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
               <h3>Match Found:</h3>
               <p>Name: {matchedPatient.firstName} {matchedPatient.lastName}</p>
               <p>Date of Birth: {formatDate(matchedPatient.dateOfBirth)}</p>
-              <button className="btn btn-danger">Register Patient</button>
             </div>
           ) : (
             searchClicked && 

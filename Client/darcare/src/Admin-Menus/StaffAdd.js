@@ -44,7 +44,7 @@ export const AddStaffForm = () => {
 
     return(
     <div>
-        <h2>Add New Staff</h2>
+        <h2>Edit Staff</h2>
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="firstName">First Name:</label>

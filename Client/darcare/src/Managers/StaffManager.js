@@ -26,3 +26,20 @@ export const getAllStaff = () => {
         })
     })
     }
+
+    export const deleteStaff = (id) => {
+        return fetch(`${baseUrl}/delete/${id}`, {
+          method: "DELETE",
+        })
+          .then(() => getAllStaff())
+      };
+
+    export const editStaff = (editedStaff) => {
+    return fetch(`${baseUrl}/edit/${editedStaff.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedStaff)
+    }
+    )}

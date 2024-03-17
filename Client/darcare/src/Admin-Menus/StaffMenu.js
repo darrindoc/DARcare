@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllStaff } from "../Managers/StaffManager";
+import { deleteStaff, getAllStaff } from "../Managers/StaffManager";
 import { Link } from "react-router-dom";
 
 export const StaffList = () => {
@@ -30,6 +30,11 @@ export const StaffList = () => {
 
     return lastNameMatch && firstNameMatch
   });
+
+  const handleDeleteButton = (id) => {
+    deleteStaff(id);
+    window.location.reload();
+  }
 
   return (
     <div class="col-fluid text-center">
@@ -75,7 +80,10 @@ export const StaffList = () => {
               <td>{staffMember.firstName}</td>
               <td>{staffMember.credentials}</td>
               <td>{staffMember.title}</td>
-              <td><Link to={`/patient/record/${staffMember.id}`} className="btn btn-success">Manage</Link><button class="btn btn-danger mx-2">Delete</button></td>
+              <td>
+                <Link to={`/staff/edit/${staffMember.id}`} className="btn btn-success">Manage</Link>
+                <button onClick={() => handleDeleteButton(staffMember.id)} className="btn btn-danger mx-2">Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>

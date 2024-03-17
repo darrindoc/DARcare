@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using DARcare.Repositories;
 using DARcare.Utils;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Hosting;
 
 namespace DARcare.Repositories
 {
@@ -29,7 +30,8 @@ namespace DARcare.Repositories
                         st.name AS StaffTypeName, d.id, d.name AS departmentName
                         FROM Staff s
                         LEFT JOIN StaffType st on s.StaffTypeId = st.Id
-                        LEFT JOIN Department d on s.departmentId = d.id";
+                        LEFT JOIN Department d on s.departmentId = d.id
+                        ORDER BY s.lastName";
                     List<Staff> users = new List<Staff>();
 
                     var reader = cmd.ExecuteReader();
@@ -79,7 +81,7 @@ namespace DARcare.Repositories
                         FROM Staff s
                         LEFT JOIN StaffType st on s.StaffTypeId = st.Id
                         LEFT JOIN Department d on s.departmentId = d.id
-                         WHERE s.userName = @userName";
+                        WHERE s.userName = @userName";
 
                     DbUtils.AddParameter(cmd, "@userName", username);
 
@@ -134,28 +136,79 @@ namespace DARcare.Repositories
             }
         }
 
-                public void Add(Staff staff)
+        public void Add(Staff staff)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    using (var conn = Connection)
-                    {
-                        conn.Open();
-                        using (var cmd = conn.CreateCommand())
-                        {
-                            cmd.CommandText = @"INSERT INTO Staff (firstName, lastName, credentials, title, userName, userPassword, staffTypeId, departmentId)
-                                                OUTPUT INSERTED.ID
-                                                VALUES (@firstName, @lastName, @credentials, @title, @userName, @userPassword, @staffTypeId, 0)";
-                            DbUtils.AddParameter(cmd, "@firstName", staff.firstName);
-                            DbUtils.AddParameter(cmd, "@lastName", staff.lastName);
-                            DbUtils.AddParameter(cmd, "@credentials", staff.credentials);
-                            DbUtils.AddParameter(cmd, "@title", staff.title);
-                            DbUtils.AddParameter(cmd, "@userName", staff.userName);
-                            DbUtils.AddParameter(cmd, "@userPassword", staff.userPassword);
-                            DbUtils.AddParameter(cmd, "@staffTypeId", staff.staffTypeId);
+                    cmd.CommandText = @"INSERT INTO Staff (firstName, lastName, credentials, title, userName, userPassword, staffTypeId, departmentId)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@firstName, @lastName, @credentials, @title, @userName, @userPassword, @staffTypeId, 0)";
+                    DbUtils.AddParameter(cmd, "@firstName", staff.firstName);
+                    DbUtils.AddParameter(cmd, "@lastName", staff.lastName);
+                    DbUtils.AddParameter(cmd, "@credentials", staff.credentials);
+                    DbUtils.AddParameter(cmd, "@title", staff.title);
+                    DbUtils.AddParameter(cmd, "@userName", staff.userName);
+                    DbUtils.AddParameter(cmd, "@userPassword", staff.userPassword);
+                    DbUtils.AddParameter(cmd, "@staffTypeId", staff.staffTypeId);
 
-
-                    staff.Id = (int)cmd.ExecuteScalar();
-                        }
-                    }
+            staff.Id = Convert.ToInt32(cmd.ExecuteScalar());
                 }
+            }
         }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Staff
+                                        WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Update(Staff staff)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Staff
+                           SET firstName = @firstName,
+                               lastName = @lastName,
+                               credentials = @credentials,
+                               title = @title,
+                               userName = @userName,
+                               userPassword = @userPassword,
+                               staffTypeId = @staffTypeId,
+                               departmentId = @departmentId
+
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@firstName", staff.firstName);
+                    DbUtils.AddParameter(cmd, "@lastName", staff.lastName);
+                    DbUtils.AddParameter(cmd, "@credentials", staff.credentials);
+                    DbUtils.AddParameter(cmd, "@title", staff.title);
+                    DbUtils.AddParameter(cmd, "@userName", staff.userName);
+                    DbUtils.AddParameter(cmd, "@userPassword", staff.userPassword);
+                    DbUtils.AddParameter(cmd, "@staffTypeId", staff.staffTypeId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
     }
+}

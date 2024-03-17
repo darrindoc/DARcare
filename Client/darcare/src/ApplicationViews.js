@@ -11,6 +11,7 @@ import { AddTreatmentForm } from "./Components/Treatments/AddTreatmentForm";
 import { AddEncounterForm } from "./Components/Encounters/AddEncounter";
 import { StaffList } from "./Admin-Menus/StaffMenu";
 import { AddStaffForm } from "./Admin-Menus/StaffAdd";
+import { EditStaffForm } from "./Admin-Menus/StaffEdit";
 
 export default function ApplicationViews({setIsLoggedIn}) {
   return (
@@ -25,6 +26,7 @@ export default function ApplicationViews({setIsLoggedIn}) {
       <Route path="/admin/panel" element={<AdminPanel />} />
       <Route path="/staff" element={<StaffList />} />
       <Route path="/staff/add" element={<AddStaffForm/>} />
+      <Route path="/staff/edit/:id" element={<EditStaffForm/>} />
       <Route path="/addtreatment" element={<AddTreatmentForm />} />
     </Routes>
   );
