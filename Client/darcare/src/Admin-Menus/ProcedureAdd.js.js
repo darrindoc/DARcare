@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { addStaff } from '../Managers/StaffManager';
 import { getAllStaffTypes } from '../Managers/StaffTypeManager';
 
-export const AddStaffForm = () => {
+export const AddProcedureForm = () => {
     const [newStaffData, setNewStaffData] = useState({
         firstName: "",
         lastName: "",
@@ -37,7 +37,7 @@ export const AddStaffForm = () => {
     
       const handleSubmit = (event) => {
         addStaff(newStaffData)
-        navigate('/staff/menu')
+        navigate('/staff')
       };
       
 
@@ -72,7 +72,7 @@ export const AddStaffForm = () => {
             </div>
             <label htmlFor="departmentId">Department ID:</label>
             <select id="staffTypeId" name="staffTypeId" value={newStaffData.staffTypeId} onChange={handleInputChange}>
-            <option value="" >Select a Staff Type</option>
+            <option value="" disabled>Select a Staff Type</option>
             {staffTypes.map(staffType => (
                 <option key={staffType.id} value={staffType.id}>{staffType.name}</option>
             ))}

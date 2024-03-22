@@ -48,10 +48,11 @@ export const PatientSearchForm = ({ matchedPatient, setMatchedPatient }) => {
 
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-6 text-center">
-          <h1>Register Patient</h1>
+    <div className="col">
+      <div className="row ">
+      <h1 class="text-center">Register Patient</h1>
+        <div className="col-md-6 ">
+          
           <h2>Patient Search</h2>
           <form onSubmit={handleSubmit}>
             <label>

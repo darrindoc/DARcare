@@ -25,11 +25,9 @@ export default function Login({setIsLoggedIn}) {
 
   return (
     <div class="container text-center">
-      <div class="row">
-          <div>Welcome to DARcare</div>
-      </div>
-      <div class="row">
         <div class="col">
+          <h2>Welcome to DARcare</h2>
+          <p>Please sign in with your credentials.</p>
           <Form onSubmit={loginSubmit}>
             <fieldset>
               <FormGroup>
@@ -45,8 +43,8 @@ export default function Login({setIsLoggedIn}) {
               </FormGroup>
             </fieldset>
           </Form>
+          <p>Problems signing in? Contact the IT Help Desk at x9999.</p>
         </div>
       </div>
-    </div>
   );
 }

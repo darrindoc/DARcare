@@ -50,7 +50,7 @@ export const ActivePatientTable = () => {
                             <td>{new Date(activePatient.patient.dateOfBirth).toLocaleDateString('en-US')}</td>
                             <td>{patientAge(activePatient.patient.dateOfBirth)}</td>
                             <td>{activePatient.patient.gender}</td>
-                            <button class="btn btn-lg btn-danger">
+                            <button class="btn btn-lg btn-info">
                                 <Link to={`/encounter/${activePatient.id}`} className="text-white">Chart</Link>
                             </button>
                             <button class="btn btn-lg btn-success">

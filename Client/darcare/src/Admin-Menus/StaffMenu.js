@@ -68,6 +68,7 @@ export const StaffList = () => {
             <th>First Name</th>
             <th>Credentials</th>
             <th>Title</th>
+            <th>Type</th>
             <th></th>
             
           </tr>
@@ -80,6 +81,7 @@ export const StaffList = () => {
               <td>{staffMember.firstName}</td>
               <td>{staffMember.credentials}</td>
               <td>{staffMember.title}</td>
+              <td>{staffMember.staffType.name}</td>
               <td>
                 <Link to={`/staff/edit/${staffMember.id}`} className="btn btn-success">Manage</Link>
                 <button onClick={() => handleDeleteButton(staffMember.id)} className="btn btn-danger mx-2">Delete</button>

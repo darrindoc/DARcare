@@ -194,6 +194,7 @@ namespace DARcare.Repositories
 
                          WHERE Id = @Id";
 
+                    DbUtils.AddParameter(cmd, "@Id", staff.Id);
                     DbUtils.AddParameter(cmd, "@firstName", staff.firstName);
                     DbUtils.AddParameter(cmd, "@lastName", staff.lastName);
                     DbUtils.AddParameter(cmd, "@credentials", staff.credentials);
@@ -201,6 +202,7 @@ namespace DARcare.Repositories
                     DbUtils.AddParameter(cmd, "@userName", staff.userName);
                     DbUtils.AddParameter(cmd, "@userPassword", staff.userPassword);
                     DbUtils.AddParameter(cmd, "@staffTypeId", staff.staffTypeId);
+                    DbUtils.AddParameter(cmd, "@departmentId", staff.departmentId);
 
                     cmd.ExecuteNonQuery();
                 }

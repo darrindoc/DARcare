@@ -12,6 +12,9 @@ import { AddEncounterForm } from "./Components/Encounters/AddEncounter";
 import { StaffList } from "./Admin-Menus/StaffMenu";
 import { AddStaffForm } from "./Admin-Menus/StaffAdd";
 import { EditStaffForm } from "./Admin-Menus/StaffEdit";
+import { ProcedureList } from "./Admin-Menus/ProcedureMenu";
+import { AddProcedureForm } from "./Admin-Menus/ProcedureAdd.js";
+import { EditProcedureForm } from "./Admin-Menus/ProcedureEdit.js";
 
 export default function ApplicationViews({setIsLoggedIn}) {
   return (
@@ -24,9 +27,12 @@ export default function ApplicationViews({setIsLoggedIn}) {
       <Route path="/encounter/:id" element={<EncounterChart />} />
       <Route path="/encounter/add" element={<AddEncounterForm />} />
       <Route path="/admin/panel" element={<AdminPanel />} />
-      <Route path="/staff" element={<StaffList />} />
+      <Route path="/staff/menu" element={<StaffList />} />
       <Route path="/staff/add" element={<AddStaffForm/>} />
       <Route path="/staff/edit/:id" element={<EditStaffForm/>} />
+      <Route path="/procedures/menu" element={<ProcedureList />} />
+      <Route path="/procedures/add" element={<AddProcedureForm/>} />
+      <Route path="/procedures/edit/:id" element={<EditProcedureForm/>} />
       <Route path="/addtreatment" element={<AddTreatmentForm />} />
     </Routes>
   );

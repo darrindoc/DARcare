@@ -98,7 +98,8 @@ namespace DARcare.Repositories
                                 e.Id as encounterId, e.patientId, e.admitTime, e.dischargeTime, e.dischargeStatusId, e.admitStatusId, e.encounterStatusId, e.departmentID, e.locationId
                                 FROM Patient p
                                 LEFT JOIN Encounters e on p.id = e.patientId
-                                WHERE p.id = @id";
+                                WHERE p.id = @id
+                                ORDER BY e.admitTime";
                     DbUtils.AddParameter(cmd, "@id", id);
 
                     using (var reader = cmd.ExecuteReader())

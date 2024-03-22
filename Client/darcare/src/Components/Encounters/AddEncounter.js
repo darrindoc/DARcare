@@ -59,9 +59,11 @@ export const AddEncounterForm = ({patientId}) => {
   };
   
 
-  return (<div>
-    <PatientSearchForm matchedPatient={matchedPatient} setMatchedPatient={setMatchedPatient}/>
-    <div class="col text-center">
+  return (
+    <div class="col">
+      <div className="PatientSearchForm-container">
+        <PatientSearchForm matchedPatient={matchedPatient} setMatchedPatient={setMatchedPatient}/>
+      </div>  
     <form onSubmit={handleSubmit}>
         <div class="row">
         <input hidden type="text" id="encounterId" name="encounterId" value={encounterData.encounterId} onChange={handleInputChange} />
@@ -91,6 +93,6 @@ export const AddEncounterForm = ({patientId}) => {
       <button type="submit">Submit</button>
     </form>
     </div>
-    </div>
+
   );
 };
