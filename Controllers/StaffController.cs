@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DARcare.Models;
 using DARcare.Repositories;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Hosting;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,33 +44,40 @@ namespace DARcare.Controllers
             return Ok();
         }
 
-
-        /*
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpPost("add")]
+        public IActionResult Post(Staff staff)
         {
-            var user = _userRepository.GetById(id);
-            if (user == null)
+            _staffRepository.Add(staff);
+            return Ok();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
             {
-                return NotFound();
+                _staffRepository.Delete(id);
+                return NoContent();
             }
-            return Ok(user);
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SQL Exception occurred: " + ex.Message);
+                return StatusCode(500, "An error occurred while deleting the post.");
+            }
         }
 
-
-        [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Staff staff)
         {
-            userProfile.CreateDateTime = DateTime.Now;
-            userProfile.UserTypeId = UserType.AUTHOR_ID;
-            _userRepository.Add(userProfile);
-            return CreatedAtAction(
-                "GetByEmail",
-                new { email = userProfile.Email },
-                userProfile);
+            if (id != staff.Id)
+            {
+                return BadRequest();
+            }
+
+            _staffRepository.Update(staff);
+            return NoContent();
         }
-        */
+
+
     }
-
-
 }
