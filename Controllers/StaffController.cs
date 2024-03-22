@@ -66,7 +66,7 @@ namespace DARcare.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("edit/{id}")]
         public IActionResult Put(int id, Staff staff)
         {
             if (id != staff.Id)

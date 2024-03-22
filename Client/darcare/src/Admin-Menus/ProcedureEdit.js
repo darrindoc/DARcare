@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAllStaffTypes } from "../Managers/StaffTypeManager";
 import { editStaff } from "../Managers/StaffManager";
 
-export const EditStaffForm = () => {
+export const EditProcedureForm = () => {
     const { id } = useParams();
     const [editedStaff, setEditedStaff] = useState({
         id: id,
@@ -36,7 +36,7 @@ export const EditStaffForm = () => {
     
     const handleSubmit = (event) => {
     editStaff(editedStaff)
-    navigate('/staff/menu')
+    navigate('/staff')
     };
 
     const navigate = useNavigate();
